@@ -4,6 +4,7 @@
 
 int main(int argc, char **argv)
 {
+	a
 	if(argc != 3)
 	{
 		return EXIT_FAILURE;
