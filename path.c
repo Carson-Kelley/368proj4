@@ -14,13 +14,17 @@ queries *Load_Queries(char *filename){
 	FILE * in = fopen(filename, "-r");
 
 	int size;
+	int i;
 
-	fscanf("%d", size);
+	fscanf("%d\n", size);
 
 	queries * input = malloc(sizeof(queries) * (size+1));
 
-	for(int i = 0; i < size; i++){
+	for(i = 0; i < size; i++){
+		fscanf("%d %d\n"input[i]->start, input[i]->finish);
 	}
+
+	input[i] = NULL;
 
 	return input;
 }
