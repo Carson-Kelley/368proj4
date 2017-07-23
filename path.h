@@ -26,6 +26,7 @@ typedef struct queries
 {
 	int start;
 	int finish;
+
 }queries;
 
 graph *Load_Graph(char *filename, graph *input);
