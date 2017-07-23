@@ -4,7 +4,6 @@
 
 int main(int argc, char **argv)
 {
-	a
 	if(argc != 3)
 	{
 		return EXIT_FAILURE;
@@ -13,5 +12,8 @@ int main(int argc, char **argv)
 	map = Load_Graph(argv[1], map);
 
 	queries *tests = Load_Queries(argv[2]);
+
+	FreeGraph(map);
+
 	return EXIT_SUCCESS;
 }
