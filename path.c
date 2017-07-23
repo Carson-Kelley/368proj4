@@ -15,8 +15,13 @@ void FreeGraph(graph *map)
 
 graph *Load_Graph(char *filename, graph *input)
 {
-	int size;
-	fscanf("%d\n", size);
+	int vertices;
+	int edges;
+	fscanf("%d %d\n", vertices, edges);
+	input->nodes = malloc(sizeof(node) * (vertices + 1));
+	input->edges = malloc(sizeof(edge) * (edges + 1));
+	input->nodes[vertices] = NULL;
+	input->edges[vertices] = NULL;
 
 	return input;
 }
