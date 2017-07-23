@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "path.h"
 
 int main(int argc, char **argv)
@@ -13,6 +14,7 @@ int main(int argc, char **argv)
 
 	queries *tests = Load_Queries(argv[2]);
 
+	FreeQueries(tests);
 	FreeGraph(map);
 
 	return EXIT_SUCCESS;

@@ -32,3 +32,7 @@ typedef struct queries
 graph *Load_Graph(char *filename, graph *input);
 
 queries *Load_Queries(char *filename);
+
+void FreeQueries(queries * test);
+
+void FreeGraph(graph *map);

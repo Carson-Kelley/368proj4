@@ -3,6 +3,16 @@
 #include <stdbool.h>
 #include "path.h"
 
+void FreeQueries(queries *test)
+{
+	
+}
+
+void FreeGraph(graph *map)
+{
+	
+}
+
 graph *Load_Graph(char *filename, graph *input)
 {
 	int size;
