@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <path.h>
+#include "path.h"
 
 int main(int argc, char **argv)
 {
-
+	if(argc != 3)
+	{
+		return EXIT_FAILURE;
+	}
 	graph *map = malloc(sizeof(graph));
 	map = Load_Graph(argv[1], map);
 

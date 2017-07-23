@@ -1,24 +1,18 @@
 GCC = gcc -g -Werror -Wall -Wshadow -O3
-OBJS = packing_main.o packing.o
+OBJS = main.o path.o
 MEM = valgrind --tool=memcheck --leak-check=full --show-reachable=yes -v
 
-pa03: $(OBJS) packing.h
-	$(GCC) $(OBJS) packing.h -o pa03
+pa04: $(OBJS) path.h
+	$(GCC) $(OBJS) path.h -o pa04
 
 .c.o:
 	$(GCC) -c $*.c
 
-test: pa03
-	./pa03 input/r0_po.txt output/r0_out.txt
-	diff input/r0.flr output/r0_out.txt
-	./pa03 input/r6_po.txt output/r6_out.txt
-	diff input/r6.flr output/r6_out.txt
-	./pa03 input/r7_po.txt output/r7_out.txt
+test: pa04
+	./pa04 PA4_examples/map5x5.txt query5x5.txt
 
-memory: pa03
-	 $(MEM) ./pa03 input/r0_po.txt output/r0_out.txt
-	 $(MEM) ./pa03 input/r6_po.txt output/r6_out.txt
-	 $(MEM) ./pa03 input/r7_po.txt output/r7_out.txt
+memory: pa04
+	 $(MEM) ./pa04 PA4_examples/map5x5.txt query5x5.txt
 
 clean:
 	/bin/rm -f *.o

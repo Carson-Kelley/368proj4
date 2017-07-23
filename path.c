@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include "path.h"
+
 graph *Load_Graph(char *filename, graph *input)
 {
 	fscanf("%d", size);
