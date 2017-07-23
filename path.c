@@ -5,7 +5,9 @@
 
 graph *Load_Graph(char *filename, graph *input)
 {
-	fscanf("%d", size);
+	int size;
+	fscanf("%d\n", size);
+
 	return input;
 }
 queries *Load_Queries(char *filename){
