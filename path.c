@@ -43,22 +43,22 @@ graph *Load_Graph(char *filename, graph *input)
 	fclose(in);
 	return input;
 }
-queries *Load_Queries(char *filename){
+queries * Load_Queries(char *filename){
 	FILE * in = fopen(filename, "-r");
 
 	int size;
 	int i;
 
-	fscanf("%d\n", size);
+	fscanf("%d\n", &size);
 
 	queries * input = malloc(sizeof(queries) * (size+1));
 
 	for(i = 0; i < size; i++){
-		fscanf("%d %d\n"input[i]->start, input[i]->finish);
+		fscanf("%d %d\n"&input[i]->start, &input[i]->finish);
 	}
 
 	input[i] = NULL;
-
+	fclose(input);
 	return input;
 }
 
