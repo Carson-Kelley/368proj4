@@ -1,3 +1,6 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdbool.h>
 typedef struct edge
 {
 	int l;	//Corresponds to the label of the left of edge as shown in file

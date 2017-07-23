@@ -1,5 +1,6 @@
 GCC = gcc -g -Werror -Wall -Wshadow -O3
 OBJS = main.o path.o
+OBJS2 = test.o path.o
 MEM = valgrind --tool=memcheck --leak-check=full --show-reachable=yes -v
 
 pa04: $(OBJS) path.h
@@ -13,6 +14,12 @@ test: pa04
 
 memory: pa04
 	 $(MEM) ./pa04 PA4_examples/map5x5.txt query5x5.txt
+
+some: $(OBJS2) path.h 
+	$(GCC) $(OBJS2) path.h -o some
+
+jordan: some
+	$(GCC) ./some PA4_examples/query5x5.txt
 
 clean:
 	/bin/rm -f *.o
