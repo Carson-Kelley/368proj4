@@ -27,10 +27,18 @@ graph *Load_Graph(char *filename, graph *input)
 	int i = 0;
 	while(i < vertices)
 	{
-		fscanf(in, "%d %d %d\n", &(input->nodes[i].label), &(input->nodes[i].x), &(input->nodes[i].y);
+		fscanf(in, "%d %d %d\n", &(input->nodes[i].label), &(input->nodes[i].x), &(input->nodes[i].y));
 		i++;
 	}
-	fscanf(in, "", &(graph->));
+	char c = 'a';
+	i = 0;
+	do
+	{
+		fscanf(in, "%d %d", &(input->edges[i].l), &(input->edges[i].r));
+		//Calculate the distance below
+		input->edges[i].distance = 
+		i++;
+	}while((c = fgetc(in)) != EOF);
 
 	fclose(in);
 	return input;
