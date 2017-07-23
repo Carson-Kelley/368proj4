@@ -17,12 +17,22 @@ graph *Load_Graph(char *filename, graph *input)
 {
 	int vertices;
 	int edges;
-	fscanf("%d %d\n", vertices, edges);
+	FILE *in = fopen(filename, "r");
+
+	fscanf(in, "%d %d\n", &vertices, &edges);
 	input->nodes = malloc(sizeof(node) * (vertices + 1));
 	input->edges = malloc(sizeof(edge) * (edges + 1));
-	input->nodes[vertices] = NULL;
-	input->edges[vertices] = NULL;
+	//(input->nodes)[vertices] = NULL;
+	//&(input->edges)[edges] = NULL;
+	int i = 0;
+	while(i < vertices)
+	{
+		fscanf(in, "%d %d %d\n", &(input->nodes[i].label), &(input->nodes[i].x), &(input->nodes[i].y);
+		i++;
+	}
+	fscanf(in, "", &(graph->));
 
+	fclose(in);
 	return input;
 }
 queries *Load_Queries(char *filename){
