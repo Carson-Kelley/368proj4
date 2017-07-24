@@ -55,17 +55,16 @@ graph *Load_Graph(char *filename, graph *input)
 	return input;
 }
 
-queries * Load_Queries(char *filename){
+queries * Load_Queries(char *filename, int * size){
 	FILE * in = fopen(filename, "r");
 
-	int size;
 	int i;
 
-	fscanf(in,"%d\n", &size);
+	fscanf(in,"%d\n", size);
 
-	queries * input = malloc(sizeof(queries) * (size));
+	queries * input = malloc(sizeof(queries) * (*size));
 
-	for(i = 0; i < size; i++){
+	for(i = 0; i < (*size); i++){
 		fscanf(in,"%d %d\n",&(input[i].start), &(input[i].finish));
 	}
 
@@ -74,3 +73,4 @@ queries * Load_Queries(char *filename){
 	return input;
 }
 
+  
