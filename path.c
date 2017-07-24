@@ -14,12 +14,12 @@ void FreeGraph(graph *map)
 	
 }
 
-int finddist(node * a, node * b){
+int Find_Dist(node *a, node *b){
 	double sum;
 	int x = (a->x)-(b->x);
 	int y = (a->y)-(b->y);
 	sum = pow(x, 2) - pow(y,2);	
-	int dist = int (sqrt(sum));
+	int dist = (int) (sqrt(sum));
 
 	return dist;
 
@@ -54,16 +54,16 @@ graph *Load_Graph(char *filename, graph *input)
 	do
 	{
 		fscanf(in, "%d %d", &l, &r);
-		printf("%d %d\n", l, r);
+		//printf("%d %d\n", l, r);
 		//Calculate the distance below
 		curr = malloc(sizeof(edge));
-		curr->dest = r;
+		curr->dest = Find_Dist(input->nodes[l], input->nodes[r]);
 		//curr->distance = l;
 		curr->next = input->nodes[l].head;
 		input->nodes[l].head = curr;
 
 		curr = malloc(sizeof(edge));
-		curr->dest = l;
+		curr->dest = Find_Dist(input->nodes[l], input->nodes[r]);
 		//curr->distance = l;
 		curr->next = input->nodes[r].head;
 		input->nodes[r].head = curr;
@@ -77,14 +77,16 @@ graph *Load_Graph(char *filename, graph *input)
 	}while((c = fgetc(in)) != EOF);
 
 	i = 0;
-	for(curr = input->nodes[i].head; i < input->vertices; i++)
+	while(i < input->vertices)
 	{
-		//curr = input->nodes[10].head;
+		curr = input->nodes[i].head;
 		while(curr != NULL)
 		{
 			printf("%d\n", curr->dest);
 			curr = curr->next;
 		}
+		i++;
+		printf("\n");
 	}
 
 	
