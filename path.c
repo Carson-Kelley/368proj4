@@ -16,6 +16,8 @@ void FreeGraph(graph *map)
 
 int finddist(node * a, node * b){
 	double sum;
+	int x = (a->x)-(b->x);
+	int y = (a->y)-(b->y);
 	sum = pow(x, 2) - pow(y,2);	
 	int dist = int (sqrt(sum));
 
