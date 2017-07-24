@@ -36,9 +36,14 @@ graph *Load_Graph(char *filename, graph *input)
 	i = 0;
 	do
 	{
-		fscanf(in, "%d %d", &(input->edges[i].l), &(input->edges[i].r));
+		if()
+		{
+			
+		}
+		fscanf(in, "%d %d", &(input->nodes[i].), &(input->edges[i].r));
 		printf("%d %d\n", input->edges[i].l, input->edges[i].r);
 		//Calculate the distance below
+
 		int xdiff = input->nodes[input->edges[i].l].x - input->nodes[input->edges[i].r].x;
 		int ydiff = input->nodes[input->edges[i].l].y - input->nodes[input->edges[i].r].y;
 		xdiff = pow(xdiff, 2);
@@ -46,7 +51,6 @@ graph *Load_Graph(char *filename, graph *input)
 		
 		input->edges[i].distance = pow(xdiff + ydiff, 0.5);
 		printf("Distance: %d\n", input->edges[i].distance);
-		i++;
 	}while((c = fgetc(in)) != EOF);
 
 	

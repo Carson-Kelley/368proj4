@@ -5,9 +5,11 @@
 
 typedef struct edge
 {
-	int l;	//Corresponds to the label of the left of edge as shown in file
-	int r;	//Corresponds to the label of the right of edge as shown in file
+	//int l;	//Corresponds to the label of the left of edge as shown in file
+	//int r;	//Corresponds to the label of the right of edge as shown in file
+	int dest;	//The node that the edge will end on
 	int distance;	//The length of this edge
+	struct edge *next;	//Pointer to next edge in list
 
 }edge;
 
@@ -17,13 +19,14 @@ typedef struct node
 	int x;
 	int y;
 	bool visited;
+	edge *edge;
 
 }node;
 
 typedef struct graph
 {
 	node *nodes;	//Array of all the nodes
-	edge *edges;	//Array of all the edges
+	//Each node should have a linked list that contains all of its neighbors i.e. the edges that it has instead of a seperate edges array
 
 }graph;
 
