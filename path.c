@@ -14,9 +14,11 @@ void FreeGraph(graph *map)
 	
 }
 
-int finddist(int x, int y){
+int finddist(node * a, node * b){
 	double sum;
-	sum = pow(x, 2) + pow(y,2);	
+	int x = (a->x)-(b->x);
+	int y = (a->y)-(b->y);
+	sum = pow(x, 2) - pow(y,2);	
 	int dist = int (sqrt(sum));
 
 	return dist;
