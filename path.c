@@ -54,7 +54,7 @@ graph *Load_Graph(char *filename, graph *input)
 	fclose(in);
 	return input;
 }
-/*
+
 queries * Load_Queries(char *filename){
 	FILE * in = fopen(filename, "r");
 
@@ -73,4 +73,4 @@ queries * Load_Queries(char *filename){
 	fclose(in);
 	return input;
 }
-*/
+
