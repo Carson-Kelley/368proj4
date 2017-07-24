@@ -14,6 +14,15 @@ void FreeGraph(graph *map)
 	
 }
 
+int finddist(int x, int y){
+	double sum;
+	sum = pow(x, 2) + pow(y,2);	
+	int dist = int (sqrt(sum));
+
+	return dist;
+
+}
+
 graph *Load_Graph(char *filename, graph *input)
 {
 	int vertices;
