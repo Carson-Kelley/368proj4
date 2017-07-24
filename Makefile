@@ -1,4 +1,4 @@
-GCC = gcc -g -Werror -Wall -Wshadow -O3
+GCC = gcc -g -Werror -Wall -Wshadow -O3 -lm
 OBJS = main.o path.o
 OBJS2 = test.o path.o
 MEM = valgrind --tool=memcheck --leak-check=full --show-reachable=yes -v
