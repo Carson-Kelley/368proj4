@@ -44,21 +44,21 @@ graph *Load_Graph(char *filename, graph *input)
 	return input;
 }
 queries * Load_Queries(char *filename){
-	FILE * in = fopen(filename, "-r");
+	FILE * in = fopen(filename, "r");
 
 	int size;
 	int i;
 
-	fscanf("%d\n", &size);
+	fscanf(in,"%d\n", &size);
 
-	queries * input = malloc(sizeof(queries) * (size+1));
+	queries * input = malloc(sizeof(queries) * (size));
 
 	for(i = 0; i < size; i++){
-		fscanf("%d %d\n"&input[i]->start, &input[i]->finish);
+		fscanf(in,"%d %d\n",&(input[i].start), &(input[i].finish));
 	}
 
-	input[i] = NULL;
-	fclose(input);
+	//input[i] = NULL;
+	fclose(in);
 	return input;
 }
 
