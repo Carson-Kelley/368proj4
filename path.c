@@ -31,6 +31,7 @@ graph *Load_Graph(char *filename, graph *input)
 
 	fscanf(in, "%d %d\n", &vertices, &edges);
 	input->nodes = malloc(sizeof(node) * (vertices));
+	input->vertices = vertices;
 	//input->edges = malloc(sizeof(edge) * (edges);
 	//input->nodes[vertices] = NULL;
 	//input->edges[edges] = NULL;
@@ -73,11 +74,15 @@ graph *Load_Graph(char *filename, graph *input)
 		//printf("Distance: %d\n", input->edges[i].distance);
 	}while((c = fgetc(in)) != EOF);
 
-	curr = input->nodes[10].head;
-	while(curr != NULL)
+	i = 0;
+	for(curr = input->nodes[i].head; i < input->vertices; i++)
 	{
-		printf("%d\n", curr->dest);
-		curr = curr->next;
+		//curr = input->nodes[10].head;
+		while(curr != NULL)
+		{
+			printf("%d\n", curr->dest);
+			curr = curr->next;
+		}
 	}
 
 	

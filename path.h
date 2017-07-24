@@ -26,6 +26,7 @@ typedef struct node
 typedef struct graph
 {
 	node *nodes;	//Array of all the nodes
+	int vertices;	//Number of vertices in the graph
 	//Each node should have a linked list that contains all of its neighbors i.e. the edges that it has instead of a seperate edges array
 
 }graph;
