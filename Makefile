@@ -19,7 +19,7 @@ some: $(OBJS2) path.h
 	$(GCC) $(OBJS2) path.h -o some
 
 jordan: some
-	$(GCC) ./some PA4_examples/query5x5.txt
+	./some PA4_examples/query5x5.txt
 
 clean:
 	/bin/rm -f *.o
