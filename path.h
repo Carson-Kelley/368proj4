@@ -19,7 +19,7 @@ typedef struct node
 	int x;
 	int y;
 	bool visited;
-	edge *edge;
+	edge *head;
 
 }node;
 

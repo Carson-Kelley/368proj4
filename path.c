@@ -30,8 +30,8 @@ graph *Load_Graph(char *filename, graph *input)
 	FILE *in = fopen(filename, "r");
 
 	fscanf(in, "%d %d\n", &vertices, &edges);
-	input->nodes = malloc(sizeof(node) * (vertices + 1));
-	input->edges = malloc(sizeof(edge) * (edges + 1));
+	input->nodes = malloc(sizeof(node) * (vertices));
+	//input->edges = malloc(sizeof(edge) * (edges);
 	//input->nodes[vertices] = NULL;
 	//input->edges[edges] = NULL;
 	int i = 0;
@@ -39,28 +39,46 @@ graph *Load_Graph(char *filename, graph *input)
 	{
 		fscanf(in, "%d %d %d\n", &(input->nodes[i].label), &(input->nodes[i].x), &(input->nodes[i].y));
 		printf("%d %d %d\n", input->nodes[i].label, input->nodes[i].x, input->nodes[i].y);
+		input->nodes[i].head = NULL;
 		i++;
 	}
 	char c = 'a';
+	int l = 0;
+	int r = 0;
 	i = 0;
+	edge *curr = NULL;
+
 	do
 	{
-		if()
-		{
-			
-		}
-		fscanf(in, "%d %d", &(input->nodes[i].), &(input->edges[i].r));
-		printf("%d %d\n", input->edges[i].l, input->edges[i].r);
+		fscanf(in, "%d %d", &l, &r);
+		printf("%d %d\n", l, r);
 		//Calculate the distance below
+		curr = malloc(sizeof(edge));
+		curr->dest = r;
+		//curr->distance = l;
+		curr->next = input->nodes[l].head;
+		input->nodes[l].head = curr;
 
-		int xdiff = input->nodes[input->edges[i].l].x - input->nodes[input->edges[i].r].x;
+		curr = malloc(sizeof(edge));
+		curr->dest = l;
+		//curr->distance = l;
+		curr->next = input->nodes[r].head;
+		input->nodes[r].head = curr;
+		/*int xdiff = input->nodes[input->edges[i].l].x - input->nodes[input->edges[i].r].x;
 		int ydiff = input->nodes[input->edges[i].l].y - input->nodes[input->edges[i].r].y;
 		xdiff = pow(xdiff, 2);
-		ydiff = pow(ydiff, 2);
+		ydiff = pow(ydiff, 2);*/
 		
-		input->edges[i].distance = pow(xdiff + ydiff, 0.5);
-		printf("Distance: %d\n", input->edges[i].distance);
+		//input->edges[i].distance = pow(xdiff + ydiff, 0.5);
+		//printf("Distance: %d\n", input->edges[i].distance);
 	}while((c = fgetc(in)) != EOF);
+
+	curr = input->nodes[10].head;
+	while(curr != NULL)
+	{
+		printf("%d\n", curr->dest);
+		curr = curr->next;
+	}
 
 	
 
