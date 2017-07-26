@@ -146,16 +146,33 @@ queries * Load_Queries(char *filename, int * size){
 	return input;
 }
 
-/*void dijkstras(graph * map, int start, int end){
-	list? beg = map->nodes[start];
+void dijkstras(graph * map, int start, int end){
+	/*list? beg = map->nodes[start];
 	if(beg->node->
 	while(curnode->label != emd->label){
 		//find minimum edge
 		current
 		//add to current weight
+	*/
+	int currIndex = start;
+	edge *currEdge = NULL;
+	for(int i = 0; i < map->vertices; i++)
+	{
+		map->nodes[i].weight = INT_MAX;
+		map->nodes[i].prev = NULL;
+	}
+	map->nodes[start].weight = 0;
+
+	while(map->nodes[currIndex].head != NULL)
+	{
+		currEdge = map->nodes[curr
+	}
+	
 
 
 
 
 
-}*/
+
+
+}

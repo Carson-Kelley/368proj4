@@ -18,6 +18,8 @@ typedef struct node
 	int label;
 	int x;
 	int y;
+	int weight;	//The weight of the minimum path to this node
+	node *prev;
 	bool visited;
 	edge *head;
 
@@ -37,6 +39,12 @@ typedef struct queries
 	int finish;
 
 }queries;
+
+/*typedef struct nodeList
+{
+	int index;
+	nodeList *next;
+}nodeList;*/
 
 graph *Load_Graph(char *filename, graph *input);
 
