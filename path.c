@@ -6,12 +6,12 @@
 
 void FreeQueries(queries *test)
 {
-	
+
 }
 
 void FreeGraph(graph *map)
 {
-	
+
 }
 
 int Find_Dist(node a, node b){
@@ -21,7 +21,7 @@ int Find_Dist(node a, node b){
 	sum = pow(x, 2) + pow(y,2);	
 	int dist = (int) (sqrt(sum));
 
-printf("%d\n %d   %d   %d    %d \n", dist, a.x, a.y,b.x, b.y);
+	//printf("%d\n %d   %d   %d    %d \n", dist, a.x, a.y,b.x, b.y);
 	return dist;
 
 }
@@ -39,7 +39,7 @@ graph *Load_Graph(char *filename, graph *input)
 	while(i < vertices)
 	{
 		fscanf(in, "%d %d %d\n", &(input->nodes[i].label), &(input->nodes[i].x), &(input->nodes[i].y));
-//		printf("%d %d %d\n", input->nodes[i].label, input->nodes[i].x, input->nodes[i].y);
+		//		printf("%d %d %d\n", input->nodes[i].label, input->nodes[i].x, input->nodes[i].y);
 		input->nodes[i].head = NULL;
 		i++;
 	}
@@ -68,26 +68,26 @@ graph *Load_Graph(char *filename, graph *input)
 		curr->distance = distance;
 		curr->next = input->nodes[r].head;
 		input->nodes[r].head = curr;
-		
+
 		//input->edges[i].distance = pow(xdiff + ydiff, 0.5);
 		//printf("Distance: %d\n", input->edges[i].distance);
 	}while((c = fgetc(in)) != EOF);
 
 	i = 0;
-/*	while(i < input->vertices)
+	while(i < input->vertices)
 	{
 		curr = input->nodes[i].head;
 		while(curr != NULL)
 		{
-//			printf("%d\n", curr->dest);
+			printf("Current node: %d\n", input->nodes[i].label);
+			printf("%d\n", curr->dest);
 			curr = curr->next;
 		}
 		i++;
 		printf("\n");
-<<<<<<< HEAD
-	}*/
+	}
 
-	
+
 
 	fclose(in);
 	return input;
