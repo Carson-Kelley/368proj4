@@ -113,4 +113,11 @@ queries * Load_Queries(char *filename, int * size){
 	return input;
 }
 
-  
+void dijkstras(graph * map, int start, int end){
+
+
+
+
+
+
+}

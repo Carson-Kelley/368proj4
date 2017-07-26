@@ -14,10 +14,19 @@ int main(int argc, char **argv)
 	graph *map = malloc(sizeof(graph));
 	map = Load_Graph(argv[1], map);
 
-    /*int test;
-	queries *tests = Load_Queries(argv[2], &test);
+    int size;
+	queries *tests = Load_Queries(argv[2], &size);
+	
+	int start;
+	int finish;
+	int i;
+	for(i = 0; i < size; i++){
+		start = tests[i].start;
+		finish = tests[i].finish;
+		dijkstras(map, start, finish);
+	}
 
-	FreeQueries(tests);*/
+	FreeQueries(tests);
 	FreeGraph(map);
 
 	return EXIT_SUCCESS;

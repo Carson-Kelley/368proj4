@@ -45,3 +45,5 @@ queries *Load_Queries(char *filename, int * size);
 void FreeQueries(queries * test);
 
 void FreeGraph(graph *map);
+
+void dijkstras(graph * map, int start, int end);
