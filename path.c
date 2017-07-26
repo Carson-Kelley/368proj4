@@ -29,21 +29,31 @@ int Find_Dist(node a, node b){
 
 edge *Insert_Edge(edge *head, edge *new)
 {
-	edge *prev = NULL;
-	edge *curr = head;
 	if(head == NULL)
 	{
-		//head = new;
-		new->next = NULL;
 		return new;
 	}
-	while((curr != NULL) && (new->distance > curr->distance))
+	edge *prev = NULL;
+	edge *curr = head;
+
+	while(curr != NULL && (curr->distance < new->distance))
 	{
 		prev = curr;
 		curr = curr->next;
 	}
-	prev->next = curr;
-	new->next = curr;
+	if(prev == NULL)
+	{
+		new->next = head;
+		return new;
+	}
+	if(curr == NULL)
+	{
+		prev->next = new;
+		new->next = NULL;
+		return head;
+	}
+	new->next = curr->next;
+	curr->next = new;
 	return head;
 }
 
@@ -72,6 +82,7 @@ graph *Load_Graph(char *filename, graph *input)
 
 	/*do
 	  {*/
+	i = 1;
 	fseek(in, -1, SEEK_CUR);
 	while((c = fgetc(in)) != EOF)
 	{
@@ -83,17 +94,18 @@ graph *Load_Graph(char *filename, graph *input)
 		curr->dest = r;
 		distance = Find_Dist(input->nodes[l], input->nodes[r]);
 		curr->distance = distance;
+		curr->next = NULL;
 		input->nodes[l].head = Insert_Edge(input->nodes[l].head, curr);
-		//curr->next = input->nodes[l].head;
 		//input->nodes[l].head = curr;
 
 		curr = malloc(sizeof(edge));
 		curr->dest = l;
 		curr->distance = distance;
-		input->nodes[l].head = Insert_Edge(input->nodes[l].head, curr);
-		curr->next = input->nodes[r].head;
+		curr->next = NULL;
+		input->nodes[r].head = Insert_Edge(input->nodes[r].head, curr);
 		//input->nodes[r].head = curr;
 		printf("run: %d\n", i);
+		i++;
 	}
 
 	i = 0;
@@ -103,7 +115,7 @@ graph *Load_Graph(char *filename, graph *input)
 		printf("Current node: %d\n", input->nodes[i].label);
 		while(curr != NULL)
 		{
-			printf("%d\n", curr->dest);
+			printf("%d, %d\n", curr->dest, curr->distance);
 			curr = curr->next;
 		}
 		i++;
@@ -134,7 +146,7 @@ queries * Load_Queries(char *filename, int * size){
 	return input;
 }
 
-void dijkstras(graph * map, int start, int end){
+/*void dijkstras(graph * map, int start, int end){
 	list? beg = map->nodes[start];
 	if(beg->node->
 	while(curnode->label != emd->label){
@@ -146,4 +158,4 @@ void dijkstras(graph * map, int start, int end){
 
 
 
-}
+}*/
