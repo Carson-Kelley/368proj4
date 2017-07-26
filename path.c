@@ -14,10 +14,10 @@ void FreeGraph(graph *map)
 	
 }
 
-int Find_Dist(node *a, node *b){
+int Find_Dist(node a, node b){
 	double sum;
-	int x = (a->x)-(b->x);
-	int y = (a->y)-(b->y);
+	int x = (a.x)-(b.x);
+	int y = (a.y)-(b.y);
 	sum = pow(x, 2) - pow(y,2);	
 	int dist = (int) (sqrt(sum));
 
@@ -114,7 +114,6 @@ queries * Load_Queries(char *filename, int * size){
 }
 
 void dijkstras(graph * map, int start, int end){
-
 
 
 
