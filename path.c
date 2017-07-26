@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
+#include <limits.h>
 #include "path.h"
 
 void FreeQueries(queries *test)
@@ -26,6 +27,26 @@ int Find_Dist(node a, node b){
 
 }
 
+edge *Insert_Edge(edge *head, edge *new)
+{
+	edge *prev = NULL;
+	edge *curr = head;
+	if(head == NULL)
+	{
+		//head = new;
+		new->next = NULL;
+		return new;
+	}
+	while((curr != NULL) && (new->distance > curr->distance))
+	{
+		prev = curr;
+		curr = curr->next;
+	}
+	prev->next = curr;
+	new->next = curr;
+	return head;
+}
+
 graph *Load_Graph(char *filename, graph *input)
 {
 	int vertices;
@@ -46,40 +67,42 @@ graph *Load_Graph(char *filename, graph *input)
 	char c = 'a';
 	int l = 0;
 	int r = 0;
-	i = 0;
 	edge *curr = NULL;
 	int distance = 0;
 
-	do
+	/*do
+	  {*/
+	fseek(in, -1, SEEK_CUR);
+	while((c = fgetc(in)) != EOF)
 	{
-		fscanf(in, "%d %d", &l, &r);
-		//printf("%d %d\n", l, r);
-		//Calculate the distance below
+		if(fscanf(in, "%d %d", &l, &r) != 2)
+		{
+			break;
+		}
 		curr = malloc(sizeof(edge));
 		curr->dest = r;
 		distance = Find_Dist(input->nodes[l], input->nodes[r]);
 		curr->distance = distance;
-		//curr->distance = l;
-		curr->next = input->nodes[l].head;
-		input->nodes[l].head = curr;
+		input->nodes[l].head = Insert_Edge(input->nodes[l].head, curr);
+		//curr->next = input->nodes[l].head;
+		//input->nodes[l].head = curr;
 
 		curr = malloc(sizeof(edge));
 		curr->dest = l;
 		curr->distance = distance;
+		input->nodes[l].head = Insert_Edge(input->nodes[l].head, curr);
 		curr->next = input->nodes[r].head;
-		input->nodes[r].head = curr;
-
-		//input->edges[i].distance = pow(xdiff + ydiff, 0.5);
-		//printf("Distance: %d\n", input->edges[i].distance);
-	}while((c = fgetc(in)) != EOF);
+		//input->nodes[r].head = curr;
+		printf("run: %d\n", i);
+	}
 
 	i = 0;
 	while(i < input->vertices)
 	{
 		curr = input->nodes[i].head;
+		printf("Current node: %d\n", input->nodes[i].label);
 		while(curr != NULL)
 		{
-			printf("Current node: %d\n", input->nodes[i].label);
 			printf("%d\n", curr->dest);
 			curr = curr->next;
 		}
