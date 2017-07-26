@@ -112,6 +112,12 @@ queries * Load_Queries(char *filename, int * size){
 }
 
 void dijkstras(graph * map, int start, int end){
+	list? beg = map->nodes[start];
+	if(beg->node->
+	while(curnode->label != emd->label){
+		//find minimum edge
+		current
+		//add to current weight
 
 
 
