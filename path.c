@@ -35,8 +35,6 @@ graph *Load_Graph(char *filename, graph *input)
 	input->nodes = malloc(sizeof(node) * (vertices));
 	input->vertices = vertices;
 	//input->edges = malloc(sizeof(edge) * (edges);
-	//input->nodes[vertices] = NULL;
-	//input->edges[edges] = NULL;
 	int i = 0;
 	while(i < vertices)
 	{
@@ -57,7 +55,7 @@ graph *Load_Graph(char *filename, graph *input)
 		//printf("%d %d\n", l, r);
 		//Calculate the distance below
 		curr = malloc(sizeof(edge));
-		curr->dest = Find_Dist(input->nodes[l], input->nodes[r]);
+		curr->distance = Find_Dist(input->nodes[l], input->nodes[r]);
 		//curr->distance = l;
 		curr->next = input->nodes[l].head;
 		input->nodes[l].head = curr;
@@ -67,10 +65,6 @@ graph *Load_Graph(char *filename, graph *input)
 		//curr->distance = l;
 		curr->next = input->nodes[r].head;
 		input->nodes[r].head = curr;
-		/*int xdiff = input->nodes[input->edges[i].l].x - input->nodes[input->edges[i].r].x;
-		int ydiff = input->nodes[input->edges[i].l].y - input->nodes[input->edges[i].r].y;
-		xdiff = pow(xdiff, 2);
-		ydiff = pow(ydiff, 2);*/
 		
 		//input->edges[i].distance = pow(xdiff + ydiff, 0.5);
 		//printf("Distance: %d\n", input->edges[i].distance);
