@@ -34,12 +34,11 @@ graph *Load_Graph(char *filename, graph *input)
 	fscanf(in, "%d %d\n", &vertices, &edges);
 	input->nodes = malloc(sizeof(node) * (vertices));
 	input->vertices = vertices;
-	//input->edges = malloc(sizeof(edge) * (edges);
 	int i = 0;
 	while(i < vertices)
 	{
 		fscanf(in, "%d %d %d\n", &(input->nodes[i].label), &(input->nodes[i].x), &(input->nodes[i].y));
-		printf("%d %d %d\n", input->nodes[i].label, input->nodes[i].x, input->nodes[i].y);
+		//printf("%d %d %d\n", input->nodes[i].label, input->nodes[i].x, input->nodes[i].y);
 		input->nodes[i].head = NULL;
 		i++;
 	}
@@ -48,6 +47,7 @@ graph *Load_Graph(char *filename, graph *input)
 	int r = 0;
 	i = 0;
 	edge *curr = NULL;
+	int distance = 0;
 
 	do
 	{
@@ -55,14 +55,16 @@ graph *Load_Graph(char *filename, graph *input)
 		//printf("%d %d\n", l, r);
 		//Calculate the distance below
 		curr = malloc(sizeof(edge));
-		curr->distance = Find_Dist(input->nodes[l], input->nodes[r]);
+		curr->dest = r;
+		distance = Find_Dist(input->nodes[l], input->nodes[r]);
+		curr->distance = distance;
 		//curr->distance = l;
 		curr->next = input->nodes[l].head;
 		input->nodes[l].head = curr;
 
 		curr = malloc(sizeof(edge));
-		curr->dest = Find_Dist(input->nodes[l], input->nodes[r]);
-		//curr->distance = l;
+		curr->dest = l;
+		curr->distance = distance;
 		curr->next = input->nodes[r].head;
 		input->nodes[r].head = curr;
 		
@@ -70,6 +72,7 @@ graph *Load_Graph(char *filename, graph *input)
 		//printf("Distance: %d\n", input->edges[i].distance);
 	}while((c = fgetc(in)) != EOF);
 
+	/*
 	i = 0;
 	while(i < input->vertices)
 	{
@@ -81,7 +84,7 @@ graph *Load_Graph(char *filename, graph *input)
 		}
 		i++;
 		printf("\n");
-	}
+	}*/
 
 	
 
