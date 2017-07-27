@@ -159,6 +159,7 @@ void dijkstras(graph * map, int start, int end){
 	int currIndex = start;
 	int nextIndex = 0;
 	int distance = 0;
+	int i = 0;
 	edge *currEdge = NULL;
 	for(i = 0; i < map->vertices; i++)
 	{
