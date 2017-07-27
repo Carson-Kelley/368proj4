@@ -145,7 +145,12 @@ queries * Load_Queries(char *filename, int * size){
 	fclose(in);
 	return input;
 }
-
+void printlist(node * list){                                                                                                                                  
+	if(list->next != NULL){                                                                                                                               
+               printlist(list->next);                                                                                                                        
+	}      
+	printf(list->label);                                                                                                                                  
+}	                                                              
 void dijkstras(graph * map, int start, int end){
 	int currIndex = start;
 	int nextIndex = 0;
@@ -182,11 +187,8 @@ void dijkstras(graph * map, int start, int end){
 		currIndex = nextIndex;
 	}
 
-
-
-
-
-
+	printf("%d", nodes[currIndex].weight);
+	printlist(nodes[currentIndex]);
 
 
 }
