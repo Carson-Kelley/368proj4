@@ -63,14 +63,17 @@ graph *Load_Graph(char *filename, graph *input)
 	int edges;
 	FILE *in = fopen(filename, "r");
 
-	if(fscanf(in, "%d %d\n", &vertices, &edges) != 2)
+	if(fscanf(in, "%d %d\n", &vertices, &edges) != 2){
 		return;
+	}
 	input->nodes = malloc(sizeof(node) * (vertices));
 	input->vertices = vertices;
 	int i = 0;
 	while(i < vertices)
 	{
-		fscanf(in, "%d %d %d\n", &(input->nodes[i].label), &(input->nodes[i].x), &(input->nodes[i].y));
+		if(fscanf(in, "%d %d %d\n", &(input->nodes[i].label), &(input->nodes[i].x), &(input->nodes[i].y))!= 3){
+			return;
+		}
 		//		printf("%d %d %d\n", input->nodes[i].label, input->nodes[i].x, input->nodes[i].y);
 		input->nodes[i].head = NULL;
 		i++;
@@ -134,12 +137,15 @@ queries * Load_Queries(char *filename, int * size){
 
 	int i;
 
-	fscanf(in,"%d\n", size);
+	if(fscanf(in,"%d\n", size) != 1)
+		return;
 
 	queries * input = malloc(sizeof(queries) * (*size));
 
 	for(i = 0; i < (*size); i++){
-		fscanf(in,"%d %d\n",&(input[i].start), &(input[i].finish));
+		if(fscanf(in,"%d %d\n",&(input[i].start), &(input[i].finish)) != 2){
+			return;
+			}
 	}
 
 	//input[i] = NULL;
