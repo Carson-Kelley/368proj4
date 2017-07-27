@@ -17,14 +17,14 @@ int main(int argc, char **argv)
     int size;
 	queries *tests = Load_Queries(argv[2], &size);
 	
-	/*int start;
+	int start;
 	int finish;
 	int i;
 	for(i = 0; i < size; i++){
 		start = tests[i].start;
 		finish = tests[i].finish;
 		dijkstras(map, start, finish);
-	}*/
+	}
 
 	FreeQueries(tests);
 	FreeGraph(map);

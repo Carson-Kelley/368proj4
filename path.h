@@ -20,7 +20,7 @@ typedef struct node
 	int x;
 	int y;
 	int weight;	//The weight of the minimum path to this node
-	node *prev;
+	struct node *prev;
 	bool visited;
 	edge *head;
 

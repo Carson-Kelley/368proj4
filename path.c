@@ -184,7 +184,7 @@ void dijkstras(graph * map, int start, int end){
 			if(distance < map->nodes[currEdge->dest].weight)
 			{
 				map->nodes[currEdge->dest].weight = distance;
-				map->nodes[currEdge->dest]->prev = map->nodes[currIndex];
+				map->nodes[currEdge->dest].prev = &(map->nodes[currIndex]);
 			}
 		}
 		currIndex = currIndex + nextIndex;
