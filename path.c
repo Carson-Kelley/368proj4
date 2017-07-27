@@ -153,14 +153,15 @@ void printlist(node *list){
 	if(list->prev != NULL){                                                                                                                               
 		printlist(list->prev);                                                                                                                        
 	}      
-	printf("%d",list->label);                                                                                                                                  
+	printf("%d ",list->label);                                                                                                                                  
 }	                                                              
 void dijkstras(graph * map, int start, int end){
 	int currIndex = start;
 	int nextIndex = 0;
 	int distance = 0;
 	edge *currEdge = NULL;
-	for(int i = 0; i < map->vertices; i++)
+	int i;
+	for(i = 0; i < map->vertices; i++)
 	{
 		map->nodes[i].weight = INT_MAX;
 		map->nodes[i].prev = NULL;
@@ -201,11 +202,25 @@ void dijkstras(graph * map, int start, int end){
 			}
 			currEdge = currEdge->next;
 		}
-		map->nodes[nextIndex].prev = &(map->nodes[currIndex]);
-		currIndex = nextIndex;
 		map->nodes[currIndex].visited = true;
+		//map->nodes[nextIndex].prev = &(map->nodes[currIndex]);
+		currIndex = nextIndex;
 		//free(currEdge);
 	}
+	
+	//Trying to fix final path
+	/*currIndex = start;
+	currEdge = map->nodes[currIndex].head;
+	distance = 0;
+	while(currIndex != end)
+	{
+		distance = map->nodes[currIndex].weight + currEdge;
+		while(currEdge != NULL)
+		{
+			distance = map->nodes[currIndex].weight + currEdge;
+		}
+	}*/
+
 
 	printf("%d\n", map->nodes[currIndex].weight);
 	printlist(&(map->nodes[currIndex]));
