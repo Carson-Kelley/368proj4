@@ -16,6 +16,9 @@ test: pa04
 memory: pa04
 	 $(MEM) ./pa04 PA4_examples/map5x5.txt PA4_examples/query5x5.txt
 
+instruct: PA4_examples/shortestpath
+	$(MEM) ./PA4_examples/shortestpath PA4_examples/map5x5.txt PA4_examples/query5x5.txt
+
 some: $(OBJS2) path.h 
 	$(GCC) $(OBJS2) path.h -o some
 

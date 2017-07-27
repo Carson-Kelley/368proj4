@@ -184,6 +184,7 @@ void dijkstras(graph * map, int start, int end){
 		}
 		if(currEdge == NULL)
 		{
+			//curr
 			printf("INF\n%d %d\n", start, end);
 		}
 		//nextIndex = (map->nodes[currIndex].head)->dest;
@@ -200,6 +201,7 @@ void dijkstras(graph * map, int start, int end){
 			}
 			currEdge = currEdge->next;
 		}
+		map->nodes[nextIndex].prev = &(map->nodes[currIndex]);
 		currIndex = nextIndex;
 		map->nodes[currIndex].visited = true;
 		//free(currEdge);
