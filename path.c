@@ -174,21 +174,35 @@ void dijkstras(graph * map, int start, int end){
 
 	while(map->nodes[end].visited != true)
 	{
-		nextIndex = (map->nodes[currIndex].head)->dest;
-		while(map->nodes[currIndex].head != NULL)
+		printf("Current Index: %d\n", currIndex);
+		currEdge = map->nodes[currIndex].head;
+		nextIndex = currEdge->dest;
+		while((map->nodes[currEdge->dest].visited == true) && currEdge != NULL)
 		{
-			currEdge = map->nodes[currIndex].head;
-			map->nodes[currEdge->dest].visited = true;
+			currEdge = currEdge->next;
+			nextIndex = currEdge->dest;
+		}
+		if(currEdge == NULL)
+		{
+			printf("INF\n%d %d\n", start, end);
+		}
+		//nextIndex = (map->nodes[currIndex].head)->dest;
+		currEdge = map->nodes[currIndex].head;
+		while(currEdge != NULL)
+		{
+			//map->nodes[currEdge->dest].visited = true;
 			distance = currEdge->distance + map->nodes[currIndex].weight;
-			map->nodes[currIndex].head = map->nodes[currIndex].head->next;
+			//map->nodes[currIndex].head = map->nodes[currIndex].head->next;
 			if(distance < map->nodes[currEdge->dest].weight)
 			{
 				map->nodes[currEdge->dest].weight = distance;
 				map->nodes[currEdge->dest].prev = &(map->nodes[currIndex]);
 			}
-			free(currEdge);
+			currEdge = currEdge->next;
 		}
 		currIndex = nextIndex;
+		map->nodes[currIndex].visited = true;
+		//free(currEdge);
 	}
 
 	printf("%d\n", map->nodes[currIndex].weight);
