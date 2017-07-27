@@ -147,13 +147,6 @@ queries * Load_Queries(char *filename, int * size){
 }
 
 void dijkstras(graph * map, int start, int end){
-	/*list? beg = map->nodes[start];
-	if(beg->node->
-	while(curnode->label != emd->label){
-		//find minimum edge
-		current
-		//add to current weight
-	*/
 	int currIndex = start;
 	int nextIndex = 0;
 	int distance = 0;
@@ -163,7 +156,6 @@ void dijkstras(graph * map, int start, int end){
 		map->nodes[i].weight = INT_MAX;
 		map->nodes[i].prev = NULL;
 		map->nodes[i].visited = false;
-
 	}
 	map->nodes[start].weight = 0;
 
@@ -173,28 +165,22 @@ void dijkstras(graph * map, int start, int end){
 
 	while(map->nodes[end].visited != true)
 	{
-		nextIndex = map->nodes[currIndex].head->dest;
+		nextIndex = (map->nodes[currIndex].head)->dest;
 		while(map->nodes[currIndex].head != NULL)
 		{
 			currEdge = map->nodes[currIndex].head;
 			map->nodes[currEdge->dest].visited = true;
 			distance = currEdge->distance + map->nodes[currIndex].weight;
 			map->nodes[currIndex].head = map->nodes[currIndex].head->next;
-			free(currEdge);
 			if(distance < map->nodes[currEdge->dest].weight)
 			{
 				map->nodes[currEdge->dest].weight = distance;
 				map->nodes[currEdge->dest].prev = &(map->nodes[currIndex]);
 			}
+			free(currEdge);
 		}
-		currIndex = currIndex + nextIndex;
+		currIndex = nextIndex;
 	}
-	/*if(distance < )
-	  {
-
-	  }*/
-	//}
-	//}
 
 
 
