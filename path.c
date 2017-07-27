@@ -63,7 +63,8 @@ graph *Load_Graph(char *filename, graph *input)
 	int edges;
 	FILE *in = fopen(filename, "r");
 
-	fscanf(in, "%d %d\n", &vertices, &edges);
+	if(fscanf(in, "%d %d\n", &vertices, &edges) != 2)
+		return;
 	input->nodes = malloc(sizeof(node) * (vertices));
 	input->vertices = vertices;
 	int i = 0;
@@ -143,11 +144,11 @@ queries * Load_Queries(char *filename, int * size){
 	fclose(in);
 	return input;
 }
-void printlist(node * list){                                                                                                                                  
-	if(list->next != NULL){                                                                                                                               
-               printlist(list->next);                                                                                                                        
+void printlist(node *list){                                                                                                                                  
+	if(list->prev != NULL){                                                                                                                               
+               printlist(list->prev);                                                                                                                        
 	}      
-	printf(list->label);                                                                                                                                  
+	printf("%d",list->label);                                                                                                                                  
 }	                                                              
 void dijkstras(graph * map, int start, int end){
 	int currIndex = start;
@@ -185,8 +186,8 @@ void dijkstras(graph * map, int start, int end){
 		currIndex = nextIndex;
 	}
 
-	printf("%d", nodes[currIndex].weight);
-	printlist(nodes[currentIndex]);
+	printf("%d\n", map->nodes[currIndex].weight);
+	printlist(&(map->nodes[currIndex]));
 
 
 }
