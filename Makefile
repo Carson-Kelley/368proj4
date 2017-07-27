@@ -11,6 +11,7 @@ pa04: $(OBJS) path.h
 
 test: pa04
 	./pa04 PA4_examples/map5x5.txt PA4_examples/query5x5.txt
+	#./pa04 PA4_examples/usa.txt PA4_examples/usa10.txt
 
 memory: pa04
 	 $(MEM) ./pa04 PA4_examples/map5x5.txt query5x5.txt
