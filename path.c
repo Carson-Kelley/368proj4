@@ -126,8 +126,6 @@ graph *Load_Graph(char *filename, graph *input)
 		printf("\n");
 	}
 
-
-
 	fclose(in);
 	return input;
 }
