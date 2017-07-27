@@ -4,7 +4,7 @@ OBJS2 = test.o path.o
 MEM = valgrind --tool=memcheck --leak-check=full --show-reachable=yes -v
 
 pa04: $(OBJS) path.h
-	$(GCC) $(OBJS) path.h -o pa04
+	$(GCC) $(OBJS) path.h -o pa04 -lm
 
 .c.o:
 	$(GCC) -c $*.c
