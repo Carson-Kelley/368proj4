@@ -63,18 +63,15 @@ graph *Load_Graph(char *filename, graph *input)
 	int edges;
 	FILE *in = fopen(filename, "r");
 
-	if(fscanf(in, "%d %d\n", &vertices, &edges) != 2){
-		return;
-	}
 	if(fscanf(in, "%d %d\n", &vertices, &edges) != 2)
-		return input;
+	return input;
 	input->nodes = malloc(sizeof(node) * (vertices));
 	input->vertices = vertices;
 	int i = 0;
 	while(i < vertices)
 	{
 		if(fscanf(in, "%d %d %d\n", &(input->nodes[i].label), &(input->nodes[i].x), &(input->nodes[i].y))!= 3){
-			return;
+			return input;
 		}
 		//		printf("%d %d %d\n", input->nodes[i].label, input->nodes[i].x, input->nodes[i].y);
 		input->nodes[i].head = NULL;
@@ -138,13 +135,13 @@ queries * Load_Queries(char *filename, int * size){
 	int i;
 
 	if(fscanf(in,"%d\n", size) != 1)
-		return;
+		return NULL;
 
 	queries * input = malloc(sizeof(queries) * (*size));
 
 	for(i = 0; i < (*size); i++){
 		if(fscanf(in,"%d %d\n",&(input[i].start), &(input[i].finish)) != 2){
-			return;
+			return NULL;
 			}
 	}
 
