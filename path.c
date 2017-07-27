@@ -160,7 +160,6 @@ void dijkstras(graph * map, int start, int end){
 	int nextIndex = 0;
 	int distance = 0;
 	edge *currEdge = NULL;
-	int i;
 	for(i = 0; i < map->vertices; i++)
 	{
 		map->nodes[i].weight = INT_MAX;
