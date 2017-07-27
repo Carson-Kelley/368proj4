@@ -63,9 +63,14 @@ graph *Load_Graph(char *filename, graph *input)
 	int edges;
 	FILE *in = fopen(filename, "r");
 
+<<<<<<< HEAD
 	if(fscanf(in, "%d %d\n", &vertices, &edges) != 2){
 		return;
 	}
+=======
+	if(fscanf(in, "%d %d\n", &vertices, &edges) != 2)
+		return input;
+>>>>>>> c9a07a4151d10610f18e611cd402ac243f95516f
 	input->nodes = malloc(sizeof(node) * (vertices));
 	input->vertices = vertices;
 	int i = 0;
@@ -152,7 +157,7 @@ queries * Load_Queries(char *filename, int * size){
 }
 void printlist(node *list){                                                                                                                                  
 	if(list->prev != NULL){                                                                                                                               
-               printlist(list->prev);                                                                                                                        
+		printlist(list->prev);                                                                                                                        
 	}      
 	printf("%d",list->label);                                                                                                                                  
 }	                                                              
