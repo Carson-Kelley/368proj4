@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<stdbool.h>
 #include<math.h>
+#include<limits.h>
 
 typedef struct edge
 {
