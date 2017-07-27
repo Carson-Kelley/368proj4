@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 	for(i = 0; i < size; i++){
 		start = tests[i].start;
 		finish = tests[i].finish;
-		dijkstras(map, 6, 23);
+		dijkstras(map, start, finish);
 	}
 	
 	FreeQueries(tests);
