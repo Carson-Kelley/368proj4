@@ -163,11 +163,11 @@ nodeList * Push(nodeList *head, nodeList *new)
 }
 
 //This function will return the minimum weight node in the queue
-nodeList * Pop(nodeList **head)
+nodeList * Pop(nodeList *head)
 {
-	nodeList *result = *head;
-	nodeList *curr = *head;
-	nodeList *prev = *head;
+	nodeList *result = head;
+	nodeList *curr = head;
+	nodeList *prev = head;
 	while(curr != NULL)
 	{
 		if(curr->label->weight < result->label->weight)
@@ -182,8 +182,9 @@ nodeList * Pop(nodeList **head)
 	}
 	if(prev == curr)
 	{
-		result = *head;
-		*head = (*head)->next;
+		result = head;
+		head = head->next;
+		return result;
 	}
 	prev->next = result->next;
 	result->next = NULL;
@@ -204,17 +205,17 @@ void dijkstras(graph * map, int start, int end){
 	{
 		map->nodes[i].weight = INT_MAX;
 		map->nodes[i].prev = NULL;
-		map->nodes[i].visited = false;
+		//map->nodes[i].visited = false;
 		currList = malloc(sizeof(nodeList));
 		currList->label = &(map->nodes[i]);
-		currList->next = NULL;
 		head = Push(head, currList);
 	}
 	map->nodes[start].weight = 0;
 
 	while(head != NULL)
 	{
-		currList = Pop(&head);
+
+		currList = Pop(head);
 		curr = currList->label;
 		currEdge = curr->head;
 		if(curr->label == end)
@@ -234,6 +235,7 @@ void dijkstras(graph * map, int start, int end){
 			}
 			currEdge = currEdge->next;
 		}
+		//free(currList);
 	}
 	printf("INF\n%d %d\n", start, end);
 	return;

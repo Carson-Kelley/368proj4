@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 		dijkstras(map, start, finish);
 	}
 	
-	FreeQueries(tests);
+	free(tests);
 	FreeGraph(map);
 
 	return EXIT_SUCCESS;
