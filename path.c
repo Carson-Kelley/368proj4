@@ -12,7 +12,7 @@ void FreeQueries(queries *test)
 
 void FreeGraph(graph *map)
 {
-
+	
 }
 
 int Find_Dist(node a, node b){
@@ -211,7 +211,7 @@ void dijkstras(graph * map, int start, int end){
 		head = Push(head, currList);
 	}
 	map->nodes[start].weight = 0;
-
+	nodeList * temp;
 	while(head != NULL)
 	{
 
@@ -223,6 +223,12 @@ void dijkstras(graph * map, int start, int end){
 			printf("%d\n", curr->weight);
 			printlist(curr);
 			printf("\n");
+			while(currList != NULL){
+				temp = currList;
+				currList = currList->next;
+				free(temp);
+			}
+
 			return;
 		}
 		while(currEdge != NULL)
@@ -238,6 +244,9 @@ void dijkstras(graph * map, int start, int end){
 		//free(currList);
 	}
 	printf("INF\n%d %d\n", start, end);
+
+	
+
 	return;
 
 	//BEGINNING OF ALGORITHM THAT ALMOST WORKS
