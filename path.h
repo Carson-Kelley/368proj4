@@ -26,6 +26,12 @@ typedef struct node
 
 }node;
 
+typedef struct nodeList
+{
+	node *label;
+	struct nodeList *next;
+}nodeList;
+
 typedef struct graph
 {
 	node *nodes;	//Array of all the nodes

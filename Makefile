@@ -11,13 +11,22 @@ pa04: $(OBJS) path.h
 
 test: pa04
 	./pa04 PA4_examples/map5x5.txt PA4_examples/query5x5.txt
-	#./pa04 PA4_examples/usa.txt PA4_examples/usa10.txt
+	./pa04 PA4_examples/usa.txt PA4_examples/usa1.txt
+	./pa04 PA4_examples/map6.txt PA4_examples/query2.txt
+	./pa04 PA4_examples/usa.txt PA4_examples/usa10.txt
+	./pa04 PA4_examples/usa.txt PA4_examples/usa100.txt
 
 memory: pa04
 	 $(MEM) ./pa04 PA4_examples/map5x5.txt PA4_examples/query5x5.txt
 
-instruct: PA4_examples/shortestpath
-	$(MEM) ./PA4_examples/shortestpath PA4_examples/map5x5.txt PA4_examples/query5x5.txt
+instmem: PA4_examples/shortestpath
+	$(MEM) ./PA4_examples/shortestpath PA4_examples/usa.txt PA4_examples/usa1.txt
+
+inst: PA4_examples/shortestpath
+	./PA4_examples/shortestpath PA4_examples/map5x5.txt PA4_examples/query5x5.txt
+	./PA4_examples/shortestpath PA4_examples/usa.txt PA4_examples/usa1.txt
+	./PA4_examples/shortestpath PA4_examples/usa.txt PA4_examples/usa10.txt
+	./PA4_examples/shortestpath PA4_examples/usa.txt PA4_examples/usa100.txt
 
 some: $(OBJS2) path.h 
 	$(GCC) $(OBJS2) path.h -o some

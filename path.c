@@ -22,7 +22,6 @@ int Find_Dist(node a, node b){
 	sum = pow(x, 2) + pow(y,2);	
 	int dist = (int) (sqrt(sum));
 
-	//printf("%d\n %d   %d   %d    %d \n", dist, a.x, a.y,b.x, b.y);
 	return dist;
 
 }
@@ -107,10 +106,10 @@ graph *Load_Graph(char *filename, graph *input)
 		curr->next = NULL;
 		input->nodes[r].head = Insert_Edge(input->nodes[r].head, curr);
 		//input->nodes[r].head = curr;
-		printf("run: %d\n", i);
+		//printf("run: %d\n", i);
 		i++;
 	}
-
+	/*
 	i = 0;
 	while(i < input->vertices)
 	{
@@ -124,6 +123,7 @@ graph *Load_Graph(char *filename, graph *input)
 		i++;
 		printf("\n");
 	}
+	*/
 
 	fclose(in);
 	return input;
@@ -154,39 +154,108 @@ void printlist(node *list){
 		printlist(list->prev);                                                                                                                        
 	}      
 	printf("%d ",list->label);                                                                                                                                  
-}	                                                              
+}
+
+nodeList * Push(nodeList *head, nodeList *new)
+{
+	new->next = head;
+	return new;
+}
+
+//This function will return the minimum weight node in the queue
+nodeList * Pop(nodeList **head)
+{
+	nodeList *result = *head;
+	nodeList *curr = *head;
+	nodeList *prev = *head;
+	while(curr != NULL)
+	{
+		if(curr->label->weight < result->label->weight)
+		{
+			result = curr;
+			while(prev != curr && prev->next != curr)
+			{
+				prev = prev->next;
+			}
+		}
+		curr = curr->next;
+	}
+	if(prev == curr)
+	{
+		result = *head;
+		*head = (*head)->next;
+	}
+	prev->next = result->next;
+	result->next = NULL;
+	return result;
+}
+
 void dijkstras(graph * map, int start, int end){
-	int currIndex = start;
-	int nextIndex = 0;
+	//int currIndex = start;
+	//int nextIndex = 0;
 	int distance = 0;
 	int i = 0;
+	node *curr;
 	edge *currEdge = NULL;
+	nodeList *head = NULL;
+	nodeList *currList = head;
+	
 	for(i = 0; i < map->vertices; i++)
 	{
 		map->nodes[i].weight = INT_MAX;
 		map->nodes[i].prev = NULL;
 		map->nodes[i].visited = false;
+		currList = malloc(sizeof(nodeList));
+		currList->label = &(map->nodes[i]);
+		currList->next = NULL;
+		head = Push(head, currList);
 	}
 	map->nodes[start].weight = 0;
 
-	/*for(int i = 0; i < map->vertices; i++)
-	  {
-	  map->nodes[];*/
+	while(head != NULL)
+	{
+		currList = Pop(&head);
+		curr = currList->label;
+		currEdge = curr->head;
+		if(curr->label == end)
+		{
+			printf("%d\n", curr->weight);
+			printlist(curr);
+			printf("\n");
+			return;
+		}
+		while(currEdge != NULL)
+		{
+			distance = curr->weight + currEdge->distance;
+			if (distance < map->nodes[currEdge->dest].weight)
+			{
+				map->nodes[currEdge->dest].weight = distance;
+				map->nodes[currEdge->dest].prev = curr;
+			}
+			currEdge = currEdge->next;
+		}
+	}
+	printf("INF\n%d %d\n", start, end);
+	return;
 
+	//BEGINNING OF ALGORITHM THAT ALMOST WORKS
+	/*
 	while(map->nodes[end].visited != true)
 	{
 		printf("Current Index: %d\n", currIndex);
 		currEdge = map->nodes[currIndex].head;
-		nextIndex = currEdge->dest;
+		//nextIndex = currEdge->dest;
+
 		while((map->nodes[currEdge->dest].visited == true) && currEdge != NULL)
 		{
 			currEdge = currEdge->next;
-			nextIndex = currEdge->dest;
+			//nextIndex = currEdge->dest;
 		}
 		if(currEdge == NULL)
 		{
 			//curr
 			printf("INF\n%d %d\n", start, end);
+			return;
 		}
 		//nextIndex = (map->nodes[currIndex].head)->dest;
 		currEdge = map->nodes[currIndex].head;
@@ -199,14 +268,24 @@ void dijkstras(graph * map, int start, int end){
 			{
 				map->nodes[currEdge->dest].weight = distance;
 				map->nodes[currEdge->dest].prev = &(map->nodes[currIndex]);
+				Pop();
+				Push();
 			}
 			currEdge = currEdge->next;
+			currList = malloc(sizeof(nodeList));
+			currList->list
+				while()
+				{
+
+				}
 		}
 		map->nodes[currIndex].visited = true;
 		//map->nodes[nextIndex].prev = &(map->nodes[currIndex]);
 		currIndex = nextIndex;
 		//free(currEdge);
 	}
+	*/
+	//END OF ALGORITHM THAT ALMOST WORKS
 	
 	//Trying to fix final path
 	/*currIndex = start;
@@ -221,9 +300,8 @@ void dijkstras(graph * map, int start, int end){
 		}
 	}*/
 
-
-	printf("%d\n", map->nodes[currIndex].weight);
-	printlist(&(map->nodes[currIndex]));
+	//printf("%d\n", map->nodes[currIndex].weight);
+	//printlist(&(map->nodes[currIndex]));
 
 
 }
