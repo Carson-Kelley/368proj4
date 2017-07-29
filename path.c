@@ -72,17 +72,13 @@ graph *Load_Graph(char *filename, graph *input)
 		input->nodes[i].head = NULL;
 		i++;
 	}
-	char c = 'a';
 	int l = 0;
 	int r = 0;
 	edge *curr = NULL;
 	int distance = 0;
 
-	/*do
-	  {*/
-	i = 1;
-	fseek(in, -1, SEEK_CUR);
-	while((c = fgetc(in)) != EOF)
+	i = 0;
+	while(i < edges)
 	{
 		if(fscanf(in, "%d %d", &l, &r) != 2)
 		{
@@ -94,19 +90,17 @@ graph *Load_Graph(char *filename, graph *input)
 		curr->distance = distance;
 		curr->next = NULL;
 		input->nodes[l].head = Insert_Edge(input->nodes[l].head, curr);
-		//input->nodes[l].head = curr;
 
 		curr = malloc(sizeof(edge));
 		curr->dest = l;
 		curr->distance = distance;
 		curr->next = NULL;
 		input->nodes[r].head = Insert_Edge(input->nodes[r].head, curr);
-		//input->nodes[r].head = curr;
-		//printf("run: %d\n", i);
 		i++;
+		fseek(in, 1, SEEK_CUR);
 	}
 	
-	i = 0;
+	/*i = 0;
 	while(i < input->vertices)
 	{
 		curr = input->nodes[i].head;
@@ -118,7 +112,7 @@ graph *Load_Graph(char *filename, graph *input)
 		}
 		i++;
 		printf("\n");
-	}
+	}*/
 
 	fclose(in);
 	return input;
@@ -204,7 +198,7 @@ void dijkstras(graph * map, int start, int end){
 	nodeList *head = NULL;
 	nodeList *currList = head;
 	
-	//node *print = curr;
+	//nodeList *print = curr;
 	
 	for(i = 0; i < map->vertices; i++)
 	{
@@ -219,10 +213,36 @@ void dijkstras(graph * map, int start, int end){
 	nodeList * temp;
 	while(head != NULL)
 	{
-
+		/*while(print != NULL)
+		{
+			printf();
+			print = print->next;
+		}*/
 		currList = Pop(head);
 		curr = currList->label;
 		currEdge = curr->head;
+		if(curr->label == end)
+		{
+			printf("%d\n", curr->weight);
+			printlist(curr);
+			printf("\n");
+			/*while(currList != NULL){
+				temp = currList;
+				currList = currList->next;
+				//free(temp);
+			}*/
+
+			return;
+		}
+		while(currEdge != NULL)
+		{
+			distance = curr->weight + currEdge->distance;
+			if (distance < map->nodes[currEdge->dest].weight)
+			{
+				map->nodes[currEdge->dest].weight = distance;
+				map->nodes[currEdge->dest].prev = curr;
+			}
+			currEdge = currEdge->next;
 		if(curr->label == end)
 		{
 			printf("%d\n", curr->weight);
@@ -236,15 +256,6 @@ void dijkstras(graph * map, int start, int end){
 
 			return;
 		}
-		while(currEdge != NULL)
-		{
-			distance = curr->weight + currEdge->distance;
-			if (distance < map->nodes[currEdge->dest].weight)
-			{
-				map->nodes[currEdge->dest].weight = distance;
-				map->nodes[currEdge->dest].prev = curr;
-			}
-			currEdge = currEdge->next;
 			//Printing edges
 			/*print = head;
 			i = 0;
