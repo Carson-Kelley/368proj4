@@ -13,14 +13,12 @@ void FreeQueries(queries *test)
 void FreeGraph(graph *map)
 {
 	int i = 0;
-	free(map->nodes);
 	for(i = 0; (i< map->vertices); i = i + 1){
-		while(map->nodes[i]->edges != NULL){
-			edge * freeE = map->nodes[i]->edges;
-			map->nodes[i]->edges = map->nodes[i]->edges->next;
+		while(map->nodes[i].head != NULL){
+			edge * freeE = map->nodes[i].head;
+			map->nodes[i].head = map->nodes[i].head->next;
 			free(freeE);	
 		}
-		i = i + 1;
 	}
 	free(map->nodes);
 	free(map);	
@@ -271,12 +269,14 @@ void dijkstras(graph *map, int start, int end)
 		{
 			if(curr->weight == INT_MAX)
 			{
+				free(currList);
 				printf("INF\n%d %d\n", start, end);
 				return;
 			}
 			printf("%d\n", curr->weight);
 			printlist(curr);
 			printf("\n");
+			free(currList);
 			return;
 		}
 		currEdge = curr->head;
@@ -296,9 +296,11 @@ void dijkstras(graph *map, int start, int end)
 
 	if(curr->weight == INT_MAX)
 	{
+		free(currList);
 		printf("INF\n%d %d\n", start, end);
 		return;
 	}
+	free(currList);
 	printf("%d\n", curr->weight);
 	printlist(curr);
 	printf("\n");
