@@ -59,7 +59,7 @@ graph *Load_Graph(char *filename, graph *input)
 	FILE *in = fopen(filename, "r");
 
 	if(fscanf(in, "%d %d\n", &vertices, &edges) != 2)
-	return input;
+	return NULL;
 	input->nodes = malloc(sizeof(node) * (vertices));
 	input->vertices = vertices;
 	int i = 0;
@@ -100,7 +100,7 @@ graph *Load_Graph(char *filename, graph *input)
 		fseek(in, 1, SEEK_CUR);
 	}
 	
-	/*i = 0;
+	i = 0;
 	while(i < input->vertices)
 	{
 		curr = input->nodes[i].head;
@@ -112,7 +112,7 @@ graph *Load_Graph(char *filename, graph *input)
 		}
 		i++;
 		printf("\n");
-	}*/
+	}
 
 	fclose(in);
 	return input;
@@ -138,12 +138,17 @@ queries * Load_Queries(char *filename, int * size){
 	fclose(in);
 	return input;
 }
+
 void printlist(node *list){                                                                                                                                  
 	if(list->prev != NULL){                                                                                                                               
 		printlist(list->prev);                                                                                                                        
 	}      
 	printf("%d ",list->label);                                                                                                                                  
 }
+
+/*
+ * BEGINNING OF OUR BACKUP CODE*****
+ * *********************
 
 nodeList * Push(nodeList *head, nodeList *new)
 {
@@ -152,12 +157,12 @@ nodeList * Push(nodeList *head, nodeList *new)
 }
 
 //This function will return the minimum weight node in the queue
-nodeList * Pop(nodeList *head)
+nodeList * Pop(nodeList **head)
 {
-	nodeList *result = head;
-	nodeList *curr = head->next;
+	nodeList *result = *head;
+	nodeList *curr = (*head)->next;
 	//nodeList *prev = head;
-	nodeList *prev = head;
+	nodeList *prev = *head;
 	while(curr != NULL)
 	{
 		if(curr->label->weight < result->label->weight)
@@ -165,26 +170,20 @@ nodeList * Pop(nodeList *head)
 			result = curr;
 			while(prev->next != curr)
 			{
-				/*if(prev == NULL)
-				{
-					prev = head;
-				}
-				else
-				{*/
 					prev = prev->next;
 				//}
 			}
 		}
 		curr = curr->next;
 	}
-	/*if(prev == curr)
+	//if(prev == curr)
 	{
 		result = head;
 		head = head->next;
 		return result;
-	}*/
+	}
 	prev->next = result->next;
-	result->next = NULL;
+	//result->next = NULL;
 	return result;
 }
 
@@ -197,8 +196,7 @@ void dijkstras(graph * map, int start, int end){
 	edge *currEdge = NULL;
 	nodeList *head = NULL;
 	nodeList *currList = head;
-	
-	//nodeList *print = curr;
+	nodeList *print = currList;
 	
 	for(i = 0; i < map->vertices; i++)
 	{
@@ -210,15 +208,24 @@ void dijkstras(graph * map, int start, int end){
 		head = Push(head, currList);
 	}
 	map->nodes[start].weight = 0;
+	/*currList = malloc(sizeof(nodeList));
+	currList->label = &(map->nodes[start]);
+	head = Push(head, currList);*/
 	nodeList * temp;
+
+
+
 	while(head != NULL)
 	{
-		/*while(print != NULL)
+		currList = Pop(&head);
+		print = head;
+		printf("Current queue: ");
+		while (print != NULL)
 		{
-			printf();
+			printf("%d ", print->label->label);
 			print = print->next;
-		}*/
-		currList = Pop(head);
+		}
+		printf("\n\n");
 		curr = currList->label;
 		currEdge = curr->head;
 		if(curr->label == end)
@@ -241,12 +248,15 @@ void dijkstras(graph * map, int start, int end){
 			{
 				map->nodes[currEdge->dest].weight = distance;
 				map->nodes[currEdge->dest].prev = curr;
+				/*currList = malloc(sizeof(nodeList));
+				currList->label = &(map->nodes[curr->label]);
+				head = Push(head, currList);*/
 			}
 			currEdge = currEdge->next;
-		if(curr->label == end)
-		{
-			printf("%d\n", curr->weight);
-			printlist(curr);
+			if(curr->label == end)
+			{
+				printf("%d\n", curr->weight);
+				printlist(curr);
 			printf("\n");
 			while(currList != NULL){
 				temp = currList;
@@ -281,70 +291,7 @@ void dijkstras(graph * map, int start, int end){
 
 	return;
 
-	//BEGINNING OF ALGORITHM THAT ALMOST WORKS
-	/*
-	while(map->nodes[end].visited != true)
-	{
-		printf("Current Index: %d\n", currIndex);
-		currEdge = map->nodes[currIndex].head;
-		//nextIndex = currEdge->dest;
-
-		while((map->nodes[currEdge->dest].visited == true) && currEdge != NULL)
-		{
-			currEdge = currEdge->next;
-			//nextIndex = currEdge->dest;
-		}
-		if(currEdge == NULL)
-		{
-			//curr
-			printf("INF\n%d %d\n", start, end);
-			return;
-		}
-		//nextIndex = (map->nodes[currIndex].head)->dest;
-		currEdge = map->nodes[currIndex].head;
-		while(currEdge != NULL)
-		{
-			//map->nodes[currEdge->dest].visited = true;
-			distance = currEdge->distance + map->nodes[currIndex].weight;
-			//map->nodes[currIndex].head = map->nodes[currIndex].head->next;
-			if(distance < map->nodes[currEdge->dest].weight)
-			{
-				map->nodes[currEdge->dest].weight = distance;
-				map->nodes[currEdge->dest].prev = &(map->nodes[currIndex]);
-				Pop();
-				Push();
-			}
-			currEdge = currEdge->next;
-			currList = malloc(sizeof(nodeList));
-			currList->list
-				while()
-				{
-
-				}
-		}
-		map->nodes[currIndex].visited = true;
-		//map->nodes[nextIndex].prev = &(map->nodes[currIndex]);
-		currIndex = nextIndex;
-		//free(currEdge);
-	}
-	*/
-	//END OF ALGORITHM THAT ALMOST WORKS
-	
-	//Trying to fix final path
-	/*currIndex = start;
-	currEdge = map->nodes[currIndex].head;
-	distance = 0;
-	while(currIndex != end)
-	{
-		distance = map->nodes[currIndex].weight + currEdge;
-		while(currEdge != NULL)
-		{
-			distance = map->nodes[currIndex].weight + currEdge;
-		}
-	}*/
-
-	//printf("%d\n", map->nodes[currIndex].weight);
-	//printlist(&(map->nodes[currIndex]));
 
 
 }
+*/
