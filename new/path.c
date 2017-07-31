@@ -223,6 +223,10 @@ nodeList *reorder(nodeList *head, node *target)
 
 void freeList(nodeList *head)
 {
+	if(head == NULL)
+	{
+		return;
+	}
 	if(head->next != NULL)
 	{
 		freeList(head->next);
