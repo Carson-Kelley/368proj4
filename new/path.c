@@ -13,14 +13,11 @@ void FreeQueries(queries *test)
 void FreeGraph(graph *map)
 {
 	int i = 0;
-	free(map->nodes);
 	for(i = 0; (i< map->vertices); i = i + 1){
 		while(map->nodes[i]->edges != NULL){
-			edge * freeE = map->nodes[i]->edges;
-			map->nodes[i]->edges = map->nodes[i]->edges->next;
-			free(freeE);	
+			edge * freeE = map->nodes[i].head;
+			map->nodes[i].edges = map->nodes[i].edges->next;
 		}
-		i = i + 1;
 	}
 	free(map->nodes);
 	free(map);	
