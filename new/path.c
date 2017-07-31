@@ -271,6 +271,7 @@ void dijkstras(graph *map, int start, int end)
 		{
 			if(curr->weight == INT_MAX)
 			{
+				free(currList);
 				freeList(head);
 				printf("INF\n%d %d\n", start, end);
 				return;
@@ -278,6 +279,7 @@ void dijkstras(graph *map, int start, int end)
 			printf("%d\n", curr->weight);
 			printlist(curr);
 			printf("\n");
+			free(currList);
 			freeList(head);
 			return;
 		}
@@ -298,11 +300,11 @@ void dijkstras(graph *map, int start, int end)
 
 	if(curr->weight == INT_MAX)
 	{
-		freeList(head);
+		//freeList(head);
 		printf("INF\n%d %d\n", start, end);
 		return;
 	}
-	freeList(head);
+	//freeList(head);
 	printf("%d\n", curr->weight);
 	printlist(curr);
 	printf("\n");

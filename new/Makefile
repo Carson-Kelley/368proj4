@@ -17,10 +17,10 @@ test: pa04
 	#./pa04 ../PA4_examples/usa.txt ../PA4_examples/usa100.txt
 
 memory: pa04
-	 $(MEM) ./pa04 ../PA4_examples/map5x5.txt ../PA4_examples/query5x5.txt
+	 #$(MEM) ./pa04 ../PA4_examples/map5x5.txt ../PA4_examples/query5x5.txt
 	 #$(MEM) ./pa04 ../PA4_examples/map6.txt ../PA4_examples/query2.txt
 	 #$(MEM) ./pa04 ../PA4_examples/usa.txt ../PA4_examples/usa1.txt
-	 #$(MEM) ./pa04 ../PA4_examples/usa.txt ../PA4_examples/usa10.txt
+	 $(MEM) ./pa04 ../PA4_examples/usa.txt ../PA4_examples/usa10.txt
 	 #$(MEM) ./pa04 ../PA4_examples/usa.txt ../PA4_examples/usa100.txt
 
 instmem: ../PA4_examples/shortestpath
